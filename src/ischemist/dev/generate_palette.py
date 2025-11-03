@@ -40,7 +40,29 @@ def generate_palette(
         A list of hex color codes.
     """
     palette = Color.interpolate(colors, space=space)
-    return [palette(i / (n_points - 1)).to_string(hex=True) for i in range(n_points)]
+    return [palette(i / (n_points - 1)).convert("srgb").to_string(hex=True) for i in range(n_points)]
+
+
+def generate_pastel_palette(n_points: int, lightness: float = 0.9, chroma: float = 0.1) -> list[str]:
+    """
+    Generates a pastel palette by rotating the hue at a fixed lightness and chroma.
+
+    Args:
+        n_points: The number of colors to generate.
+        lightness: Oklch lightness value (0-1). Pastels are high, e.g., 0.85-0.95.
+        chroma: Oklch chroma value (saturation). Pastels are low, e.g., 0.05-0.15.
+
+    Returns:
+        A list of hex color codes.
+    """
+    colors = []
+    for i in range(n_points):
+        hue = i * (360 / n_points)
+        # Create the color directly in the oklch space
+        pastel_color = Color("oklch", [lightness, chroma, hue])
+        # Convert to srgb (for display) and then to a hex string
+        colors.append(pastel_color.convert("srgb").to_string(hex=True))
+    return colors
 
 
 def print_palette_for_registry(name: str, colors: list[str]):
@@ -48,8 +70,8 @@ def print_palette_for_registry(name: str, colors: list[str]):
     print(f'    "{name}": ColorPalette.from_hex_codes([')
 
     # Print in rows of 8 for readability
-    for i in range(0, len(colors), 8):
-        chunk = colors[i : i + 8]
+    for i in range(0, len(colors), 10):
+        chunk = colors[i : i + 10]
         formatted_chunk = ", ".join(f'"{c}"' for c in chunk)
         print(f"        {formatted_chunk},")
     print("    ]),")

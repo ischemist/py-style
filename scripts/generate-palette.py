@@ -1,38 +1,24 @@
-from ischemist.dev.generate_palette import generate_palette, print_palette_for_registry
+from ischemist.colors import ColorPalette
+from ischemist.dev.generate_palette import generate_pastel_palette, print_palette_for_registry
+from ischemist.dev.visualize import plot_palettes
 
 if __name__ == "__main__":
-    print("--- Generating Palettes for `ischemist.style.colors.py` ---")
-    print("Copy the output below into the `PALETTES` dictionary.\n")
+    generated_palettes = {}
 
-    # --- Example 1: A better sequential blue palette ---
-    # Interpolating from a deep blue to a light cyan in Oklab space
-    soft_blue_20 = generate_palette(["#0d0887", "#6eceb1", "#f0f921"], 20)
-    print_palette_for_registry("soft_blue_20", soft_blue_20)
+    for lightness in [0.8, 0.85, 0.86, 0.87, 0.88, 0.89, 0.9, 0.91, 0.92, 0.93, 0.95]:
+        for chroma in [0.05, 0.06, 0.07, 0.08, 0.09, 0.10, 0.15]:
+            soft_pastels_12 = generate_pastel_palette(12, lightness=lightness, chroma=chroma)
+            generated_palettes[f"soft_pastels_{lightness}_{chroma}"] = ColorPalette.from_hex_codes(soft_pastels_12)
 
-    # --- Example 2: A "magma"-like diverging palette ---
-    # This shows a multi-point gradient
-    magma_20 = generate_palette(["#000004", "#51127c", "#f89540", "#fcfdbf"], 20)
-    print_palette_for_registry("magma_20", magma_20)
+    if generated_palettes:
+        print("\n--- 2. Visualizing NEWLY Generated Palettes ---")
+        new_fig = plot_palettes(
+            generated_palettes,
+            cols=min(4, len(generated_palettes)),
+            title="Preview of Newly Generated Palettes",
+        )
+        new_fig.show()
+    else:
+        print("\n--- No new palettes generated. ---")
 
-    # --- Example 3: A Cubehelix palette for scientific visualization ---
-    # This is excellent for line plots as it has a monotonic lightness gradient
-    # which also works in grayscale.
-    # science_helix_20 = generate_cubehelix_palette(
-    #     n_points=20,
-    #     start_hue=260, # Start at a purplish color
-    #     rotations=-0.8, # Rotate towards yellow/green
-    #     hue_gamma=0.8,
-    #     lightness_gamma=1.2,
-    # )
-    # print_palette_for_registry("science_helix_20", science_helix_20)
-
-    # --- Example 4: A qualitative palette using spline interpolation ---
-    # This creates smooth, non-linear paths between colors.
-    # We use `oklch` to keep lightness and chroma more consistent.
-    # Note: coloraide uses `natural` for natural splines
-    qual_spline_12 = generate_palette(
-        ["#5e2a73", "#00558d", "#00767b", "#438a5b", "#a1932f", "#d29241"],
-        n_points=12,
-        space="oklch",  # LCh is good for this
-    )
-    print_palette_for_registry("qual_spline_12", qual_spline_12)
+    print_palette_for_registry("pastel", generate_pastel_palette(8, lightness=0.7879, chroma=0.1121))
