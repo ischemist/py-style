@@ -9,9 +9,12 @@ authors = [{ name = "Anton Morgunov", email = "anton@ischemist.com" }]
 license = { text = "MIT" }
 
 [project.urls]
-Homepage = "https://github.com/anmorgunov/ischemist"
-Issues = "https://github.com/anmorgunov/ischemist/issues"
+Homepage = "https://github.com/ischemist/py-style"
+Issues = "https://github.com/ischemist/py-style/issues"
 
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
 package-dir = { "" = "src" }
@@ -20,11 +23,15 @@ package-dir = { "" = "src" }
 [project.optional-dependencies]
 dev = [
     "pre-commit>=4.1.0",
-    "ruff>=0.9.6",
+    "ruff>=0.14.3",
     "pytest>=8.3.4",
     "mypy>=1.15.0",
 ]
-plotly = ["plotly>=6.1.2"]
+plotly = [
+    "coloraide>=5.1",
+    "numpy>=2.2.6",
+    "plotly>=6.1.2",
+]
 
 [tool.mypy]
 strict = true
@@ -43,5 +50,3 @@ lint.select = [
     "SIM", # flake8-simplify
     "I",   # isort
 ]
-
-
