@@ -24,6 +24,7 @@ dev = [
     "pytest>=8.3.4",
 ]
 
+[project.optional-dependencies]
 plotly = [
     "coloraide>=5.1",
     "numpy>=2.2.6",
