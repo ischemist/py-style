@@ -136,6 +136,7 @@ class ColorPalette:
         return iter(self.colors)
 
 
+# fmt:off
 # --- Palette Registry ---
 # Central dictionary holding all available color palettes.
 PALETTES: dict[str, ColorPalette] = {
@@ -147,212 +148,55 @@ PALETTES: dict[str, ColorPalette] = {
     "red_4_dark": ColorPalette.from_hex_codes(["#560000", "#76000c", "#970019", "#b80026"]),
     "green_4": ColorPalette.from_hex_codes(["#006400", "#337b02", "#669204", "#99a806"]),
     "green_4_dark": ColorPalette.from_hex_codes(["#002400", "#003400", "#004400", "#005400"]),
-    "qualitative_light": ColorPalette.from_hex_codes(
-        [
-            "#ff4d4d",
-            "#ff7f50",
-            "#ffff00",
-            "#00ff7f",
-            "#00ffff",
-            "#1e90ff",
-            "#9370db",
-            "#ff69b4",
-            "#cd5c5c",
-            "#8fbc8f",
-            "#ffd700",
-            "#32cd32",
-            "#00bfff",
-            "#ff00ff",
-            "#ff8c00",
-        ]
-    ),
-    "qualitative_dark": ColorPalette.from_hex_codes(
-        [
-            "#cc0000",
-            "#cc5500",
-            "#cccc00",
-            "#00cc66",
-            "#00cccc",
-            "#0066cc",
-            "#6a5acd",
-            "#ff1493",
-            "#8b0000",
-            "#2e8b57",
-            "#daa520",
-            "#228b22",
-            "#0099cc",
-            "#cc00cc",
-            "#d2691e",
-        ]
-    ),
+
+    "qualitative_light": ColorPalette.from_hex_codes([
+        '#ff4d4d', '#ff7f50', '#ffff00', '#00ff7f', '#00ffff', '#1e90ff',
+        '#9370db', '#ff69b4', '#cd5c5c', '#8fbc8f', '#ffd700', '#32cd32',
+        '#00bfff', '#ff00ff', '#ff8c00'
+    ]),
+    "qualitative_dark": ColorPalette.from_hex_codes([
+        '#cc0000', '#cc5500', '#cccc00', '#00cc66', '#00cccc', '#0066cc',
+        '#6a5acd', '#ff1493', '#8b0000', '#2e8b57', '#daa520', '#228b22',
+        '#0099cc', '#cc00cc', '#d2691e'
+    ]),
+
     # Sequential Palettes
-    "blue_20": ColorPalette.from_hex_codes(
-        [
-            "#0026D0",
-            "#002FD2",
-            "#0039D5",
-            "#0042D7",
-            "#004CDA",
-            "#0055DC",
-            "#005FDF",
-            "#0068E1",
-            "#0071E4",
-            "#007BE6",
-            "#0084E9",
-            "#008EEB",
-            "#0097EE",
-            "#00A0F0",
-            "#00AAF3",
-            "#00B3F5",
-            "#00BDF8",
-            "#00C6FA",
-            "#00D0FD",
-            "#00D9FF",
-        ]
-    ),
-    "red_20": ColorPalette.from_hex_codes(
-        [
-            "#590000",
-            "#620808",
-            "#6A0F0F",
-            "#731717",
-            "#7C1E1E",
-            "#852626",
-            "#8D2D2D",
-            "#963535",
-            "#9F3D3D",
-            "#A84444",
-            "#B04C4C",
-            "#B95353",
-            "#C25B5B",
-            "#CB6363",
-            "#D36A6A",
-            "#DC7272",
-            "#E57979",
-            "#EE8181",
-            "#F68888",
-            "#FF9090",
-        ]
-    ),
-    "purple_20": ColorPalette.from_hex_codes(
-        [
-            "#430059",
-            "#4D0862",
-            "#560F6A",
-            "#601773",
-            "#691E7C",
-            "#732685",
-            "#7C2D8D",
-            "#863596",
-            "#8F3C9F",
-            "#9944A8",
-            "#A24BB0",
-            "#AC53B9",
-            "#B55AC2",
-            "#BF62CB",
-            "#C869D3",
-            "#D271DC",
-            "#DB78E5",
-            "#E580EE",
-            "#EE87F6",
-            "#F88FFF",
-        ]
-    ),
-    "green_20": ColorPalette.from_hex_codes(
-        [
-            "#035900",
-            "#0C6208",
-            "#156A0F",
-            "#1E7317",
-            "#267C1E",
-            "#2F8526",
-            "#388D2D",
-            "#419635",
-            "#4A9F3C",
-            "#53A844",
-            "#5BB04B",
-            "#64B953",
-            "#6DC25A",
-            "#76CB62",
-            "#7FD369",
-            "#88DC71",
-            "#90E578",
-            "#99EE80",
-            "#A2F687",
-            "#ABFF8F",
-        ]
-    ),
-    "orange_20": ColorPalette.from_hex_codes(
-        [
-            "#C76A00",
-            "#CA7008",
-            "#CD7710",
-            "#D07D18",
-            "#D38320",
-            "#D68927",
-            "#D9902F",
-            "#DC9637",
-            "#DF9C3F",
-            "#E2A247",
-            "#E4A94F",
-            "#E7AF57",
-            "#EAB55F",
-            "#EDBB67",
-            "#F0C26F",
-            "#F3C876",
-            "#F6CE7E",
-            "#F9D486",
-            "#FCDB8E",
-            "#FFE196",
-        ]
-    ),
+    "blue_20": ColorPalette.from_hex_codes([
+        "#0026D0","#002FD2","#0039D5","#0042D7","#004CDA","#0055DC","#005FDF","#0068E1",
+        "#0071E4","#007BE6","#0084E9","#008EEB","#0097EE","#00A0F0","#00AAF3","#00B3F5",
+        "#00BDF8","#00C6FA","#00D0FD","#00D9FF"
+    ]),
+    "red_20": ColorPalette.from_hex_codes([
+        "#590000","#620808","#6A0F0F","#731717","#7C1E1E","#852626","#8D2D2D","#963535",
+        "#9F3D3D","#A84444","#B04C4C","#B95353","#C25B5B","#CB6363","#D36A6A","#DC7272",
+        "#E57979","#EE8181","#F68888","#FF9090"
+    ]),
+    "purple_20": ColorPalette.from_hex_codes([
+        "#430059","#4D0862","#560F6A","#601773","#691E7C","#732685","#7C2D8D","#863596",
+        "#8F3C9F","#9944A8","#A24BB0","#AC53B9","#B55AC2","#BF62CB","#C869D3","#D271DC",
+        "#DB78E5","#E580EE","#EE87F6","#F88FFF"
+    ]),
+    "green_20": ColorPalette.from_hex_codes([
+        "#035900","#0C6208","#156A0F","#1E7317","#267C1E","#2F8526","#388D2D","#419635",
+        "#4A9F3C","#53A844","#5BB04B","#64B953","#6DC25A","#76CB62","#7FD369","#88DC71",
+        "#90E578","#99EE80","#A2F687","#ABFF8F"
+    ]),
+    "orange_20": ColorPalette.from_hex_codes([
+        "#C76A00","#CA7008","#CD7710","#D07D18","#D38320","#D68927","#D9902F","#DC9637",
+        "#DF9C3F","#E2A247","#E4A94F","#E7AF57","#EAB55F","#EDBB67","#F0C26F","#F3C876",
+        "#F6CE7E","#F9D486","#FCDB8E","#FFE196"
+    ]),
+
     # Diverging Palettes
-    "green_yellow_20": ColorPalette.from_hex_codes(
-        [
-            "#006400",
-            "#0d6a00",
-            "#1a6f01",
-            "#267502",
-            "#337b02",
-            "#408002",
-            "#4c8603",
-            "#598c03",
-            "#669204",
-            "#739704",
-            "#809d05",
-            "#8ca306",
-            "#99a806",
-            "#a6ae06",
-            "#b2b407",
-            "#bfba08",
-            "#ccbf08",
-            "#d9c508",
-            "#e6cb09",
-            "#f2d00a",
-        ]
-    ),
-    "blue_red_20": ColorPalette.from_hex_codes(
-        [
-            "#2f00ff",
-            "#3906f8",
-            "#440cf1",
-            "#4e11ea",
-            "#5917e3",
-            "#631ddc",
-            "#6d22d5",
-            "#7828ce",
-            "#822ec7",
-            "#8d34c0",
-            "#973ab9",
-            "#a13fb2",
-            "#ac45ab",
-            "#b64ba4",
-            "#c1509d",
-            "#cb5696",
-            "#d55c8f",
-            "#e06288",
-            "#ea6881",
-            "#f56d7a",
-        ]
-    ),
+    "green_yellow_20": ColorPalette.from_hex_codes([
+        '#006400', '#0d6a00', '#1a6f01', '#267502', '#337b02', '#408002', '#4c8603',
+        '#598c03', '#669204', '#739704', '#809d05', '#8ca306', '#99a806', '#a6ae06',
+        '#b2b407', '#bfba08', '#ccbf08', '#d9c508', '#e6cb09', '#f2d00a'
+    ]),
+    "blue_red_20": ColorPalette.from_hex_codes([
+        '#2f00ff', '#3906f8', '#440cf1', '#4e11ea', '#5917e3', '#631ddc', '#6d22d5',
+        '#7828ce', '#822ec7', '#8d34c0', '#973ab9', '#a13fb2', '#ac45ab', '#b64ba4',
+        '#c1509d', '#cb5696', '#d55c8f', '#e06288', '#ea6881', '#f56d7a'
+    ]),
 }
+# fmt:on
