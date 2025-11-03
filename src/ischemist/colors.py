@@ -16,13 +16,13 @@ Key Design Choices:
     than the palette size, providing superior results to simple modulo arithmetic.
 """
 
+from __future__ import annotations
+
 import colorsys
 import functools
 import itertools
 from collections.abc import Iterator
 from dataclasses import dataclass, field
-
-import numpy as np
 
 
 @dataclass(frozen=True)
@@ -41,7 +41,7 @@ class Color:
             raise ValueError(f"Invalid hex color code: {self.hex_code}")
 
     @classmethod
-    def from_rgb(cls, r: int, g: int, b: int) -> "Color":
+    def from_rgb(cls, r: int, g: int, b: int) -> Color:
         """Creates a Color instance from RGB values (0-255)."""
         for val in (r, g, b):
             if not 0 <= val <= 255:
@@ -81,7 +81,7 @@ class ColorPalette:
     colors: tuple[Color, ...] = field(default_factory=tuple)
 
     @classmethod
-    def from_hex_codes(cls, hex_codes: list[str]) -> "ColorPalette":
+    def from_hex_codes(cls, hex_codes: list[str]) -> ColorPalette:
         """Creates a ColorPalette from a list of hex color strings."""
         # Ensure '#' prefix for consistency
         processed_codes = [code if code.startswith("#") else f"#{code}" for code in hex_codes]
@@ -118,8 +118,13 @@ class ColorPalette:
             # Cycle through the palette for requests larger than its size
             selected_colors = list(itertools.islice(itertools.cycle(palette), n))
         else:
-            # Select N evenly-spaced indices using linspace
-            indices = np.linspace(0, palette_size - 1, n, dtype=int)
+            # Select N evenly-spaced indices
+            if n == 1:
+                # Handle edge case to avoid division by zero
+                indices = [0]
+            else:
+                # The core logic: map the range [0, n-1] to [0, palette_size-1]
+                indices = [round(i * (palette_size - 1) / (n - 1)) for i in range(n)]
             selected_colors = [palette[i] for i in indices]
 
         if as_hex:

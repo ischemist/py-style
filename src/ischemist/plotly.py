@@ -35,6 +35,8 @@ Example:
     styler_modified.apply_style(fig)
 """
 
+from __future__ import annotations
+
 import dataclasses
 import functools
 from typing import Any
@@ -140,7 +142,7 @@ class Styler:
 
         self.config: StyleConfig = dataclasses.replace(base_config, **overrides)
 
-    def with_params(self, **kwargs: Any) -> "Styler":
+    def with_params(self, **kwargs: Any) -> Styler:
         """
         Creates a new Styler with updated configuration parameters.
 
@@ -154,7 +156,7 @@ class Styler:
         new_config_dict = {**dataclasses.asdict(self.config), **kwargs}
         return Styler(theme=StyleConfig(**new_config_dict))
 
-    def with_theme(self, theme: str) -> "Styler":
+    def with_theme(self, theme: str) -> Styler:
         """
         Creates a new Styler based on a different theme, keeping existing overrides.
 
@@ -171,7 +173,7 @@ class Styler:
 
         return Styler(theme=theme, **overrides)
 
-    def copy(self) -> "Styler":
+    def copy(self) -> Styler:
         """Creates an identical copy of this Styler."""
         return Styler(theme=self.config)
 

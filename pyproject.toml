@@ -19,14 +19,11 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools]
 package-dir = { "" = "src" }
 
-
-[project.optional-dependencies]
+[dependency-groups]
 dev = [
-    "pre-commit>=4.1.0",
-    "ruff>=0.14.3",
     "pytest>=8.3.4",
-    "mypy>=1.15.0",
 ]
+
 plotly = [
     "coloraide>=5.1",
     "numpy>=2.2.6",
@@ -50,3 +47,4 @@ lint.select = [
     "SIM", # flake8-simplify
     "I",   # isort
 ]
+lint.ignore = ["SIM108"]
