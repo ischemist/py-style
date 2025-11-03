@@ -1,24 +1,20 @@
-default_language_version:
-  python: python3.12
-
 repos:
-  - repo: local
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    # Ruff version.
+    rev: v0.14.1
     hooks:
-      - id: ruff
+      # Run the linter.
+      - id: ruff-check
         name: ruff (linter)
-        entry: ruff check --fix
-        language: python
-        types: [python]
-        
+        args: [--fix]
+      # Run the formatter.
       - id: ruff-format
         name: ruff (formatter)
-        entry: ruff format
-        language: python
-        types: [python]
 
-      - id: mypy
-        name: mypy
-        entry: mypy
+  - repo: local
+    hooks:
+      - id: ty
+        name: ty check
+        entry: uvx ty check .
         language: system
-        types: [python]
-        args: [--strict, --ignore-missing-imports, --exclude=tests]
+        pass_filenames: false
